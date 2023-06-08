@@ -1,0 +1,213 @@
+"" Source your .vimrc
+"source ~/.vimrc
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+" set scrolloff=5
+
+" Do incremental searching.
+" set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+" map Q gq
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+set charset=utf-8
+set encoding=utf-8
+
+" ================================================================================================
+" = Extensions =====================================
+" ================================================================================================
+" Plug 'tpope/vim-surround'
+" Plug 'preservim/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
+
+
+
+" https://github.com/LintaoAmons/CoolStuffes/blob/main/ideavim/.ideavimrc
+" ================================================================================================
+" = basic =====================================
+" ================================================================================================
+set clipboard+=unnamed
+set ignorecase
+set scrolloff=25
+set history=200
+set incsearch
+set hlsearch
+
+" 中英文自动切换
+" set keep-english-in-normal
+set keep-english-in-normal-and-restore-in-insert
+let context_aware = 1
+
+
+
+" ================================================================================================
+" = No Leader Keymaps =====================================
+" ================================================================================================
+nmap ge <action>(GotoNextError)
+nmap gt <action>(GotoTest)
+nmap gu <action>(MethodUp)
+nmap gn <action>(MethodDown)
+nmap gl <action>(JumpToLastChange)
+nmap gb <action>(Back)
+nmap gf <action>(Forward)
+" last changed in current buffer(file)
+nmap ga <action>(GotoImplementation)
+nmap gs <action>(GotoSuperMethod)
+nmap gi <action>(ImplementMethods)
+
+" paste multiple times. 暂时不知妙用
+" vmap p \"_dp
+
+" bookmark
+nmap ma <action>(ToggleBookmark)
+nmap mm <action>(ManageRecentProjects)
+nmap mr <action>(Maven.Reimport)
+
+nmap L <action>(NextTab)
+nmap H <action>(PreviousTab)
+" 重命名元素
+nmap ri <action>(RenameElement)
+nmap 9 $
+" 替换粘贴
+"nmap =wp dwh"0p
+" nmap =p "+p
+nnoremap 0 ^
+nnoremap ^ 0
+
+
+
+
+nnoremap ta :action Annotate<cr>
+" 断点
+" nnoremap tb :action ToggleLineBreakpoint<cr>
+" nnoremap tm :action ToggleBookmark<cr>
+
+" ================================================================================================
+" = Leader Keymaps =====================================
+" ================================================================================================
+" leaderkey
+let mapleader=" "
+
+
+" ================================================================================================
+" 👻👻👻 Which-Key 👻👻👻
+" ================================================================================================
+set which-key
+set notimeout
+
+
+
+let g:WhichKeyDesc_No_Highlight = "<leader>nl NoHighlight"
+nmap <leader>nl :nohlsearch<CR>
+
+" c: Close ⭐️;
+let g:WhichKeyDesc_CloseBuffer = "<leader>c CloseBuffer"
+nmap <leader>c :q!<CR>
+
+" i: Insert ⭐️
+let g:WhichKeyDesc_InsertAfterBrackets = "<leader>i InsertAfterBrackets"
+nmap <leader>i f(a
+
+" j: add Semicolon and goto nextline⭐️
+let g:WhichKeyDesc_InsertSemicolon = "<leader>j InsertSemicolon"
+nmap <leader>j A;<ESC>o
+
+" e: Toggle Explorer ⭐️
+let g:WhichKeyDesc_ToggleExplorerOrExtract = "<leader>e ToggleExplorer"
+"nmap <leader>e <action>(ActivateProjectToolWindow)
+" e: Extract
+" extract method/function
+vmap <leader>em <action>(ExtractMethod)
+" extract constant
+vmap <leader>ec <action>(IntroduceConstant)
+" extract field
+vmap <leader>ef <action>(IntroduceField)
+" extract variable
+vmap <leader>ev <action>(IntroduceVariable)
+
+" s: Show ⭐️
+let g:WhichKeyDesc_Show = "<leader>s Show"
+let g:WhichKeyDesc_Show_FileStructure = "<leader>ss ShowFileStructure"
+nmap <leader>ss <action>(FileStructurePopup)
+let g:WhichKeyDesc_Show_Bookmarks = "<leader>sb ShowBookmarks"
+nmap <leader>sb <action>(ShowBookmarks)
+let g:WhichKeyDesc_Show_ParameterInfo = "<leader>sb ShowParameterInfo"
+nmap <leader>sp <action>(ParameterInfo)
+
+" r: Run/Re ⭐️
+" let g:WhichKeyDesc_RunOrRe = "<leader>r RunOrRe"
+" let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rr Run"
+" nmap <leader>rr <action>(Run)
+
+" let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rd Debug"
+" nmap <leader>rd <action>(Debug)
+" let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rd Debug"
+" nmap <leader>rd <action>(Debug)
+
+" let g:WhichKeyDesc_RunOrRe_ReRunTests = "<leader>rt ReRun"
+" nmap <leader>rt <action>(Rerun)
+" let g:WhichKeyDesc_RunOrRe_Rename = "<leader>rn Rename"
+" map <leader>rn <action>(RenameElement)
+
+" w: Window ⭐️
+let g:WhichKeyDesc_Windows = "<leader>w Windows"
+let g:WhichKeyDesc_Windows_maximize = "<leader>wo maximize"
+nmap <leader>wo <action>(UnsplitAll) \| <action>(HideAllWindows)
+let g:WhichKeyDesc_Windows_splitWindowVertically = "<leader>wl splitWindowVertically"
+nmap <leader>wl <action>(Macro.SplitVertically)
+let g:WhichKeyDesc_Windows_closeActiveWindow = "<leader>wc closeActiveWindow"
+nmap <leader>wc <c-w>c
+
+
+
+
+
+
+" imap 在编辑模式下 的移动
+imap <c-h> <Left>
+imap <c-l> <Right>
+imap <c-j> <Down>
+imap <c-k> <Up>
+
+" ================================================================================================
+" 👻👻👻 jump 👻👻👻
+" ================================================================================================
+nmap <leader><leader>s :action KJumpAction<cr>
+nmap <leader><leader>w :action KJumpAction.Word0<cr>
+nmap <leader><leader>l :action KJumpAction.Line<cr>
+
+" 搜索方案
+
+" 当前行：
+" :s/foo/bar/g
+" 全文：
+" :%s/foo/bar/g
+" https://blog.csdn.net/mygodhome/article/details/92829915
+
+
+" 单词复制： yw
+" 分别更改这些配对标点符号中的文本内容
+" ci’、ci”、ci(、ci[、ci{、ci< -
+" 分别删除这些配对标点符号中的文本内容
+" di’、di”、di(或dib、di[、di{或diB、di< -
+" 分别复制这些配对标点符号中的文本内容
+" yi’、yi”、yi(、yi[、yi{、yi< -
+" 分别选中这些配对标点符号中的文本内容
+" vi’、vi”、vi(、vi[、vi{、vi< -
+"  * 向下查找当前光标所在单词； # 逆向
