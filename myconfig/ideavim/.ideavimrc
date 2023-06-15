@@ -55,7 +55,6 @@ set keep-english-in-normal-and-restore-in-insert
 let context_aware = 1
 
 
-
 " ================================================================================================
 " = No Leader Keymaps =====================================
 " ================================================================================================
@@ -78,6 +77,7 @@ nmap gi <action>(ImplementMethods)
 nmap ma <action>(ToggleBookmark)
 nmap mm <action>(ManageRecentProjects)
 nmap mr <action>(Maven.Reimport)
+nmap mz <action>(ToggleZenMode)
 
 nmap L <action>(NextTab)
 nmap H <action>(PreviousTab)
@@ -89,7 +89,7 @@ nmap 9 $
 " nmap =p "+p
 nnoremap 0 ^
 nnoremap ^ 0
-
+nmap <enter> i<Enter><Esc>
 
 
 
