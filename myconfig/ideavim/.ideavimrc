@@ -32,7 +32,7 @@ set encoding=utf-8
 " ================================================================================================
 " = Extensions =====================================
 " ================================================================================================
-" Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 
@@ -48,6 +48,8 @@ set scrolloff=25
 set history=200
 set incsearch
 set hlsearch
+set showmode
+set surround
 
 " 中英文自动切换
 " set keep-english-in-normal
@@ -60,7 +62,7 @@ let context_aware = 1
 " ================================================================================================
 nmap ge <action>(GotoNextError)
 nmap gt <action>(GotoTest)
-nmap gu <action>(MethodUp)
+nmap gp <action>(MethodUp)
 nmap gn <action>(MethodDown)
 nmap gl <action>(JumpToLastChange)
 nmap gb <action>(Back)
@@ -69,6 +71,7 @@ nmap gf <action>(Forward)
 nmap ga <action>(GotoImplementation)
 nmap gs <action>(GotoSuperMethod)
 nmap gi <action>(ImplementMethods)
+nnoremap gu :<C-u>action ShowUsages<CR>
 
 " paste multiple times. 暂时不知妙用
 " vmap p \"_dp
@@ -89,7 +92,8 @@ nmap 9 $
 " nmap =p "+p
 nnoremap 0 ^
 nnoremap ^ 0
-nmap <enter> i<Enter><Esc>
+
+nmap <Enter> i<Enter><Esc>
 
 
 
@@ -150,32 +154,19 @@ nmap <leader>sb <action>(ShowBookmarks)
 let g:WhichKeyDesc_Show_ParameterInfo = "<leader>sb ShowParameterInfo"
 nmap <leader>sp <action>(ParameterInfo)
 
-" r: Run/Re ⭐️
-" let g:WhichKeyDesc_RunOrRe = "<leader>r RunOrRe"
-" let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rr Run"
-" nmap <leader>rr <action>(Run)
-
-" let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rd Debug"
-" nmap <leader>rd <action>(Debug)
-" let g:WhichKeyDesc_RunOrRe_ReRun = "<leader>rd Debug"
-" nmap <leader>rd <action>(Debug)
-
-" let g:WhichKeyDesc_RunOrRe_ReRunTests = "<leader>rt ReRun"
-" nmap <leader>rt <action>(Rerun)
-" let g:WhichKeyDesc_RunOrRe_Rename = "<leader>rn Rename"
-" map <leader>rn <action>(RenameElement)
 
 " w: Window ⭐️
 let g:WhichKeyDesc_Windows = "<leader>w Windows"
 let g:WhichKeyDesc_Windows_maximize = "<leader>wo maximize"
 nmap <leader>wo <action>(UnsplitAll) \| <action>(HideAllWindows)
 let g:WhichKeyDesc_Windows_splitWindowVertically = "<leader>wl splitWindowVertically"
-nmap <leader>wl <action>(Macro.SplitVertically)
+nmap <leader>wl <action>(SplitVertically)
 let g:WhichKeyDesc_Windows_closeActiveWindow = "<leader>wc closeActiveWindow"
 nmap <leader>wc <c-w>c
 
-
-
+nnoremap <Leader>o :<C-u>action RecentProjectListGroup<CR>
+nnoremap <Leader>d :<C-u>action ChooseDebugConfiguration<CR>
+nnoremap <Leader>wa :<C-u>action CloseAllEditorsButActive<CR>
 
 
 
@@ -211,3 +202,4 @@ nmap <leader><leader>l :action KJumpAction.Line<cr>
 " 分别选中这些配对标点符号中的文本内容
 " vi’、vi”、vi(、vi[、vi{、vi< -
 "  * 向下查找当前光标所在单词； # 逆向
+" https://github.com/einverne/dotfiles/blob/master/idea/.ideavimrc
