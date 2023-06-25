@@ -32,6 +32,7 @@ set encoding=utf-8
 " ================================================================================================
 " = Extensions =====================================
 " ================================================================================================
+" https://gist.github.com/wilon/ac1fc66f4a79e7b0c161c80877c75c94  surround 参考
 Plug 'tpope/vim-surround'
 " Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
@@ -64,14 +65,15 @@ nmap ge <action>(GotoNextError)
 nmap gt <action>(GotoTest)
 nmap gp <action>(MethodUp)
 nmap gn <action>(MethodDown)
-nmap gl <action>(JumpToLastChange)
 nmap gb <action>(Back)
 nmap gf <action>(Forward)
 " last changed in current buffer(file)
+nmap gl <action>(JumpToLastChange)
 nmap ga <action>(GotoImplementation)
 nmap gs <action>(GotoSuperMethod)
 nmap gi <action>(ImplementMethods)
-nnoremap gu :<C-u>action ShowUsages<CR>
+nmap gr <action>(RecentFiles)
+  
 
 " paste multiple times. 暂时不知妙用
 " vmap p \"_dp
@@ -168,8 +170,14 @@ nnoremap <Leader>o :<C-u>action RecentProjectListGroup<CR>
 nnoremap <Leader>d :<C-u>action ChooseDebugConfiguration<CR>
 nnoremap <Leader>wa :<C-u>action CloseAllEditorsButActive<CR>
 
+" g: Git ⭐️
+
+let g:WhichKeyDesc_Git = "<leader>g Git"
+let g:WhichKeyDesc_Git = "<leader>c Git.Commit.Stage"
+nmap <leader>gc <action>(ActivateCommitToolWindow)
 
 
+nmap <leader>wc <c-w>c
 " imap 在编辑模式下 的移动
 imap <c-h> <Left>
 imap <c-l> <Right>
@@ -202,4 +210,5 @@ nmap <leader><leader>l :action KJumpAction.Line<cr>
 " 分别选中这些配对标点符号中的文本内容
 " vi’、vi”、vi(、vi[、vi{、vi< -
 "  * 向下查找当前光标所在单词； # 逆向
-" https://github.com/einverne/dotfiles/blob/master/idea/.ideavimrc
+" 参考 https://github.com/einverne/dotfiles/blob/master/idea/.ideavimrc
+" https://gist.github.com/wilon/ac1fc66f4a79e7b0c161c80877c75c94  surround 参考
