@@ -41,8 +41,9 @@ Plug 'terryma/vim-multiple-cursors'
 
 " https://github.com/LintaoAmons/CoolStuffes/blob/main/ideavim/.ideavimrc
 " ================================================================================================
-" = basic =====================================
+" = 🚨basic 🚨 =====================================
 " ================================================================================================
+""" Common settings -------------------------
 set clipboard+=unnamed
 set ignorecase
 set scrolloff=25
@@ -51,6 +52,13 @@ set incsearch
 set hlsearch
 set showmode
 set surround
+set cursorline
+set autoindent "自动缩进
+set smartindent "智能缩进
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
 
 " 中英文自动切换
 " set keep-english-in-normal
@@ -62,7 +70,6 @@ let context_aware = 1
 " = No Leader Keymaps =====================================
 " ================================================================================================
 nmap ge <action>(GotoNextError)
-nmap gt <action>(GotoTest)
 nmap gp <action>(MethodUp)
 nmap gn <action>(MethodDown)
 nmap gb <action>(Back)
@@ -75,14 +82,18 @@ nmap gi <action>(ImplementMethods)
 nmap gr <action>(RecentFiles)
   
 
-" paste multiple times. 暂时不知妙用
-" vmap p \"_dp
+" paste multiple times.
+vmap p \"_dP
 
 " bookmark
 nmap ma <action>(ToggleBookmark)
+nmap ms <action>(ShowBookmarks)
 nmap mm <action>(ManageRecentProjects)
 nmap mr <action>(Maven.Reimport)
 nmap mz <action>(ToggleZenMode)
+"nmap mt <action>(ActivateTerminalToolWindow)
+nmap mc <action>(CopyReference)
+nmap md <action>(ToggleLineBreakpoint)
 
 nmap L <action>(NextTab)
 nmap H <action>(PreviousTab)
@@ -99,7 +110,6 @@ nmap <Enter> i<Enter><Esc>
 
 
 
-nnoremap ta :action Annotate<cr>
 " 断点
 " nnoremap tb :action ToggleLineBreakpoint<cr>
 " nnoremap tm :action ToggleBookmark<cr>
@@ -122,12 +132,8 @@ set notimeout
 let g:WhichKeyDesc_No_Highlight = "<leader>nl NoHighlight"
 nmap <leader>nl :nohlsearch<CR>
 
-" c: Close ⭐️;
-let g:WhichKeyDesc_CloseBuffer = "<leader>c CloseBuffer"
-nmap <leader>c :q!<CR>
-
 " i: Insert ⭐️
-let g:WhichKeyDesc_InsertAfterBrackets = "<leader>i InsertAfterBrackets"
+let g:WhichKeyDesc_InsertAfterBrackets = "<leader>i InsertAfterBrackets";
 nmap <leader>i f(a
 
 " j: add Semicolon and goto nextline⭐️
@@ -135,7 +141,7 @@ let g:WhichKeyDesc_InsertSemicolon = "<leader>j InsertSemicolon"
 nmap <leader>j A;<ESC>o
 
 " e: Toggle Explorer ⭐️
-let g:WhichKeyDesc_ToggleExplorerOrExtract = "<leader>e ToggleExplorer"
+"let g:WhichKeyDesc_ToggleExplorerOrExtract = "<leader>e ToggleExplorer"
 "nmap <leader>e <action>(ActivateProjectToolWindow)
 " e: Extract
 " extract method/function
@@ -146,6 +152,8 @@ vmap <leader>ec <action>(IntroduceConstant)
 vmap <leader>ef <action>(IntroduceField)
 " extract variable
 vmap <leader>ev <action>(IntroduceVariable)
+" Reformat the current line only
+
 
 " s: Show ⭐️
 let g:WhichKeyDesc_Show = "<leader>s Show"
@@ -155,7 +163,10 @@ let g:WhichKeyDesc_Show_Bookmarks = "<leader>sb ShowBookmarks"
 nmap <leader>sb <action>(ShowBookmarks)
 let g:WhichKeyDesc_Show_ParameterInfo = "<leader>sb ShowParameterInfo"
 nmap <leader>sp <action>(ParameterInfo)
-
+let g:WchKeyDesc_Show_select = "<leader>sv SelectInProjectView"
+nmap <leader>sv <action>(SelectInProjectView)
+let g:WchKeyDesc_Show_reformatCode= "<leader>sc ReformatCode"
+nmap <leader>sc V<Action>(ReformatCode)
 
 " w: Window ⭐️
 let g:WhichKeyDesc_Windows = "<leader>w Windows"
@@ -166,16 +177,15 @@ nmap <leader>wl <action>(SplitVertically)
 let g:WhichKeyDesc_Windows_closeActiveWindow = "<leader>wc closeActiveWindow"
 nmap <leader>wc <c-w>c
 
-nnoremap <Leader>o :<C-u>action RecentProjectListGroup<CR>
+" nnoremap <Leader>o :<C-u>action RecentProjectListGroup<CR>
 nnoremap <Leader>d :<C-u>action ChooseDebugConfiguration<CR>
 nnoremap <Leader>wa :<C-u>action CloseAllEditorsButActive<CR>
 
 " g: Git ⭐️
-
 let g:WhichKeyDesc_Git = "<leader>g Git"
-let g:WhichKeyDesc_Git = "<leader>c Git.Commit.Stage"
-nmap <leader>gc <action>(ActivateCommitToolWindow)
-
+nmap <leader>gm <action>(ActivateCommitToolWindow)
+nmap <leader>ga <action>(Annotate)
+nmap <leader>gc <action>(Git.Clone)
 
 nmap <leader>wc <c-w>c
 " imap 在编辑模式下 的移动
@@ -212,3 +222,6 @@ nmap <leader><leader>l :action KJumpAction.Line<cr>
 "  * 向下查找当前光标所在单词； # 逆向
 " 参考 https://github.com/einverne/dotfiles/blob/master/idea/.ideavimrc
 " https://gist.github.com/wilon/ac1fc66f4a79e7b0c161c80877c75c94  surround 参考
+" / 搜索模式中使用  / (Ctrl + R) 0 （即 /”0），回车， 就查找到了第一个匹配的单词。
+" 删除括号   ds   -->  ds(  ds"   cs 替换   ys 添加  ysw 添加单词  yss 整行括起来
+"  gq 格式化选中的代码块
