@@ -2,15 +2,8 @@
 "source ~/.vimrc
 
 "" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
-" set scrolloff=5
-
-" Do incremental searching.
-" set incsearch
-
 " Don't use Ex mode, use Q for formatting.
- map Q gq
+" map Q gq
 
 
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
@@ -135,6 +128,9 @@ nmap <leader>nl :nohlsearch<CR>
 " i: Insert ⭐️
 let g:WhichKeyDesc_InsertAfterBrackets = "<leader>i InsertAfterBrackets";
 nmap <leader>i f(a
+" f : find 
+let f:WhichKeyDesc_FindEverything= "<leader>f FindInPath";
+nmap <leader>ff <action>(FindInPath)
 
 " j: add Semicolon and goto nextline⭐️
 let g:WhichKeyDesc_InsertSemicolon = "<leader>j InsertSemicolon"
@@ -166,7 +162,7 @@ nmap <leader>sp <action>(ParameterInfo)
 let g:WchKeyDesc_Show_select = "<leader>sv SelectInProjectView"
 nmap <leader>sv <action>(SelectInProjectView)
 let g:WchKeyDesc_Show_reformatCode= "<leader>sc ReformatCode"
-nmap <leader>sc V<Action>(ReformatCode)
+vmap <leader>sc V<Action>(ReformatCode)
 
 " w: Window ⭐️
 let g:WhichKeyDesc_Windows = "<leader>w Windows"
