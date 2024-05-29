@@ -1,11 +1,6 @@
 "" Source your .vimrc
 "source ~/.vimrc
 
-"" -- Suggested options --
-" Don't use Ex mode, use Q for formatting.
-" map Q gq
-
-
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
@@ -31,7 +26,7 @@ Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
 
 
-
+"  当搜索模式中文乱码 Editor -> Font -> Fallback Font 修改为中文字体
 " https://github.com/LintaoAmons/CoolStuffes/blob/main/ideavim/.ideavimrc
 " ================================================================================================
 " = 🚨basic 🚨 =====================================
@@ -221,3 +216,5 @@ nmap <leader><leader>l :action KJumpAction.Line<cr>
 " / 搜索模式中使用  / (Ctrl + R) 0 （即 /”0），回车， 就查找到了第一个匹配的单词。
 " 删除括号   ds   -->  ds(  ds"   cs 替换   ys 添加  ysw 添加单词  yss 整行括起来
 "  gq 格式化选中的代码块
+
+" ctrl + v 进入块编辑模式 选上下选中文本后 按 I 或shit+i 编辑后 按ecs 实现多行插入
